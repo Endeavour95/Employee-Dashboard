@@ -1,11 +1,10 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./index.css">
-    <!-- <script src="./test.js"></script>  -->
     <script src="./test2.js"></script>
     <title>Employee Details</title>
 </head>
@@ -15,4 +14,56 @@
     </div>
 </body>
 
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <script src="test2.js"></script>
+    <title>Employee List</title>
+</head>
+<body>
+    <div id="root">
+        <div>
+            <table id="list">
+                <thead>
+                    <tr>
+                        <th>Employees List</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="button" value="John Doe" onclick="displayEmployeeDetails('John Doe')">
+                        </td>
+                    </tr>
+                    <!-- Repeat the above row structure for each employee -->
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <div>
+                <h3>Employee Details</h3>
+            </div>
+            <div id="view">
+                Please select an employee to view details.
+                <input type="button" value="Add Employee" onclick="createRegistrationForm()">
+            </div>
+        </div>
+    </div>
+
+    <!-- <script>
+        function displayEmployeeDetails(employeeName) {
+            document.getElementById('view').textContent = `Details for ${employeeName}`;
+            // Add logic to display employee details
+        }
+
+        function createRegistrationForm() {
+            // Add logic to create a registration form
+        }
+    </script> -->
+</body>
 </html>
