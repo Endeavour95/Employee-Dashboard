@@ -1,190 +1,34 @@
-/* body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-form {
-  background-color: #fff;
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-}
-
-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: #333;
-}
-
-select#myDropdown {
-  width: calc(100% - 16px);
-  padding: 12px;
-  margin-bottom: 20px;
-  box-sizing: border-box;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 16px;
-  transition: border-color 0.3s ease-in-out;
-}
-
-select#myDropdown:focus {
-  outline: none;
-  border-color: #66afe9;
-}
-
-input {
-  width: calc(100% - 16px);
-  padding: 8px;
-  margin-bottom: 16px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 16px;
-  font-size: 14px;
-}
-
-button {
-  background-color: #6b6b6b;
-  color: white;
-  padding: 7px 20px;
-  border: none;
-  border-radius: 16px;
-  cursor: pointer;
-}
-
-select {
-  color: rgb(136, 136, 141);
-  padding: 5px 15px;
-  border: none;
-  border-radius: 16px;
-  cursor: pointer;
-  border: 1px solid #ccc;
-}
-
-#heading {
-  text-align: center;
-}
-
-#can {
-  float: inline-end;
-}
-
-button:hover {
-  background-color: #609f64;
-}
-
-#can:hover {
-  background-color: #089a00;
-}
-
-h2 {
-  text-align-last: center;
-}
-
-#emp {
-  text-align: right;
-}
-.column1 {
-  text-align: left;
-}
-
-.column2 {
-  text-align: right;
-}
-
-
-
-
-
-
-
-
-#root {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-}
-
-table {
-  border-collapse: collapse;
-  width: 200px;
-}
-
-table,
-th,
-td {
-  border: 1px solid black;
-}
-
-th,
-td {
-  padding: 10px;
-  text-align: left;
-}
-
-#view {
-  border: 1px solid black;
-  padding: 10px;
-  width: 300px;
-} */
-
-
-
-
 body {
   font-family: 'Arial', sans-serif;
 }
 
 #root {
   display: flex;
-  justify-content: space-between;
-  /* margin-top: 5%;
-  margin-left: 5%;
-  margin-right: 5%; */
   margin: 30px;
-  width: 90%;
+  width: 100%;
   border-radius: 20px;
-  /* padding-top: 10%;
-  padding-left: 20%;
-  padding-right: 20%; */
   box-shadow: 0 0 10px rgb(98, 96, 96);
 }
 
 table {
   border-collapse: collapse;
   width: 100%;
-  /* border: none; */
-  /* background: transparent; */
+  text-align: center;
 }
 
 tr th {
-  text-align: center;
   border-radius: 20px;
-  font-family:cursive;
+  font-family: cursive;
 }
-
-/* tr td {
-  align-items: center;
-} */
 
 th {
   border: 1px solid #ddd;
   padding: 10px;
-  /* text-align: left; */
   border-radius: 20px;
 }
 
 td {
   border: 1px solid #ddd;
-  /* padding: 10px; */
-  /* text-align: left; */
   border-radius: 20px;
 }
 
@@ -192,22 +36,16 @@ thead {
   background-color: #f2f2f2;
 }
 
-/* #view {
-  border: 1px solid #ddd;
-  padding: 10px;
-  width: 300px;
-} */
-
 h3 {
   margin-bottom: 10px;
   text-align: center;
-  font-family:cursive;
+  font-family: cursive;
 }
 
 td input[type="button"] {
   cursor: pointer;
   font-size: 16px;
-  font-family:cursive;
+  font-family: cursive;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin: 3px 10px 3px 10px;
@@ -222,24 +60,12 @@ input[type="button"]:hover {
   background-color: #45a049;
 }
 
-input[value="Add Employee"] {
-  cursor: pointer;
-  font-size: 16px;
-  font-family:cursive;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin: 3px 10px 3px 10px;
-  background-color: #4caf50;
-  color: #fff;
-  width: 150px;
-  height: 35px;
-  border-radius: 20px;
+
+#left {
+  width: 20%;
 }
 
-/* input[type="button"]:focus {
-  outline: none;
-} */
-
-/* td input[type="button"] {
-  
-} */
+#right {
+  width: 80%;
+  text-align: center;
+}

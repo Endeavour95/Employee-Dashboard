@@ -1,23 +1,35 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <!-- <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./index.css">
-    <script src="./test2.js"></script>
+    <link rel="stylesheet" href="./navbar.css">
+    <script src="./ui.js"></script>
+    <title>Employee Details</title> -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="registration.css">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./navbar.css">
+    <script src="./ui.js"></script>
+    <script src="./backend.js"></script>
     <title>Employee Details</title>
 </head>
+
 <body onload="renderEmployeeList()">
-    <div id="root">
+    <!-- <div id="root">
         
-    </div>
+    </div> -->
 </body>
 
-</html> -->
+</html>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,9 +37,15 @@
     <script src="test2.js"></script>
     <title>Employee List</title>
 </head>
+
 <body>
+    <div id="navdiv">
+        <nav>
+            <input type="button" value="Add Employee" onclick="createRegistrationForm()">
+        </nav>
+    </div>
     <div id="root">
-        <div>
+        <div id="left">
             <table id="list">
                 <thead>
                     <tr>
@@ -40,22 +58,27 @@
                             <input type="button" value="John Doe" onclick="displayEmployeeDetails('John Doe')">
                         </td>
                     </tr>
-                    <!-- Repeat the above row structure for each employee -->
+
                 </tbody>
             </table>
         </div>
-        <div>
+        <div id="right">
             <div>
                 <h3>Employee Details</h3>
             </div>
             <div id="view">
-                Please select an employee to view details.
-                <input type="button" value="Add Employee" onclick="createRegistrationForm()">
+                Please select an employee to view details. <br>
+                jhgjhfhgf <br>
+                hgfhgfhgfh <br>
+                hjfhgfghg <br>
+                jvhghjg <br>
+                jhgfhgfhgf <br>
+                jhgfhgfhgf <br>
             </div>
         </div>
     </div>
 
-    <!-- <script>
+    <script>
         function displayEmployeeDetails(employeeName) {
             document.getElementById('view').textContent = `Details for ${employeeName}`;
             // Add logic to display employee details
@@ -64,6 +87,7 @@
         function createRegistrationForm() {
             // Add logic to create a registration form
         }
-    </script> -->
+    </script>
 </body>
-</html>
+
+</html> -->

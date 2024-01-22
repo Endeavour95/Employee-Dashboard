@@ -1,0 +1,41 @@
+nav {
+    position: relative;
+}
+
+nav input[value="Home"] {
+    cursor: pointer;
+    font-size: 16px;
+    font-family: cursive;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 20px 10px 3px 10px;
+    background-color: #4caf50;
+    color: #fff;
+    width: 150px;
+    height: 35px;
+    border-radius: 20px;
+    position: absolute;
+    left: 20px;
+}
+
+
+nav input[value="Add Employee"] {
+    cursor: pointer;
+    font-size: 16px;
+    font-family: cursive;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 20px 10px 3px 10px;
+    background-color: #4caf50;
+    color: #fff;
+    width: 150px;
+    height: 35px;
+    border-radius: 20px;
+    position: absolute;
+    right: 20px;
+}
+
+
+nav input[type="button"]:hover {
+    background-color: #45a049;
+}
