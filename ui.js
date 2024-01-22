@@ -13,31 +13,40 @@ const departments = {
     }
 }
 
+const message = {
+    empRegistered: "Employ registered successfully",
+    empExist: "Employ exist in the Employees table",
+    empEdited: "Employ details updated successfully",
+    empDeleted: "Employ associated with empId deleted successfully",
+    empNotExist: "Employ empId not found in Employess table"
+
+}
+
 let employees = {
-    '1': {
-        empId: 1,
-        empFName: "Ashutosh",
-        empLName: "Verulkar",
-        empSalary: "20000",
-        empDesignation: "Developer",
-        empDept: departments[1].deptId
-    },
-    '2': {
-        empId: 2,
-        empFName: "Harshal",
-        empLName: "Dhokane",
-        empSalary: "37000",
-        empDesignation: "Developer",
-        empDept: departments[1].deptId
-    },
-    '3': {
-        empId: 3,
-        empFName: "Sanket",
-        empLName: "Gupta",
-        empSalary: "45000",
-        empDesignation: "Data Engineer",
-        empDept: departments[3].deptId
-    }
+    // '1': {
+    //     empId: 1,
+    //     empFName: "Ashutosh",
+    //     empLName: "Verulkar",
+    //     empSalary: "20000",
+    //     empDesignation: "Developer",
+    //     empDept: departments[1].deptId
+    // },
+    // '2': {
+    //     empId: 2,
+    //     empFName: "Harshal",
+    //     empLName: "Dhokane",
+    //     empSalary: "37000",
+    //     empDesignation: "Developer",
+    //     empDept: departments[1].deptId
+    // },
+    // '3': {
+    //     empId: 3,
+    //     empFName: "Sanket",
+    //     empLName: "Gupta",
+    //     empSalary: "45000",
+    //     empDesignation: "Data Engineer",
+    //     empDept: departments[3].deptId
+    // }
 }
 
 
@@ -107,7 +116,6 @@ function renderEmployeeList() {
     const navdiv = document.createElement("div");
     navdiv.id = "navdiv";
     const nav = document.createElement("nav");
-    // navdiv.append(nav);
 
     const homeButton = document.createElement("input");
     homeButton.type = "button";
@@ -117,7 +125,6 @@ function renderEmployeeList() {
     const addButton = document.createElement("input");
     addButton.type = "button";
     addButton.value = "Add Employee";
-    // addButton.onclick = addEmployee;
     addButton.onclick = createRegistrationForm;
     nav.append(homeButton, addButton);
 
@@ -133,19 +140,109 @@ function renderEmployeeList() {
     document.body.append(navdiv, root);
 }
 
+// function displayEmployeeDetails(employee) {
+//     const viewDiv = document.getElementById("view");
+//     viewDiv.innerHTML = "";
+//     viewDiv.innerHTML = `
+//     <p>ID: ${employee.empId}</p>
+//     <p>First Name: ${employee.empFName}</p>
+//     <p>Last Name: ${employee.empLName}</p>
+//     <p>Salary: ${employee.empSalary}</p>
+//     <p>Designation: ${employee.empDesignation}</p>
+//     <p>Dept ID: ${employee.empDept}</p>
+//     `;
+// }
+
 function displayEmployeeDetails(employee) {
     const viewDiv = document.getElementById("view");
-    viewDiv.innerHTML = "";
-    viewDiv.innerHTML = `
-    <p>ID: ${employee.empId}</p>
-    <p>First Name: ${employee.empFName}</p>
-    <p>Last Name: ${employee.empLName}</p>
-    <p>Salary: ${employee.empSalary}</p>
-    <p>Designation: ${employee.empDesignation}</p>
-    <p>Dept ID: ${employee.empDept}</p>
-    `;
+    viewDiv.innerHTML = ""; // Clear previous content
+    let labels = ["Employee Id : ", "First Name : ", "Last Name : ", "Salary : ", "Designation : ", "Department : "];
+    let value = Object.values(employee);
+    // for (let i = 0; i < labels.length; i++) {
+    //     const paragraph = document.createElement("p");
+    //     paragraph.textContent = `${labels[i]}${value[i]}`
+    //     viewDiv.append(paragraph);
+    // }
+
+    const table = document.createElement("table");
+    for (let i = 0; i < labels.length; i++) {
+        const tr = document.createElement("tr");
+        const tdname = document.createElement("td");
+        tdname.textContent = labels[i];
+        const tdvalue = document.createElement("td");
+        tdvalue.textContent = value[i];
+        tr.append(tdname, tdvalue);
+        table.append(tr);
+    }
+
+    const nav = document.createElement("nav");
+
+    const editButton = document.createElement("input");
+    editButton.type = "button";
+    editButton.value = "Edit";
+    // editButton.onclick = renderEmployeeList;
+
+    const delButton = document.createElement("input");
+    delButton.type = "button";
+    delButton.value = "Delete";
+    // delButton.onclick = createRegistrationForm;
+    nav.append(editButton, delButton);
+
+    viewDiv.append(table,nav);
+
+
+
+    // const para = document.createElement("p");
+    // para.textContent = `${labels[labels.length - 1]}${departments.value[value.length - 1]}`
+    // viewDiv.append(para);
+
+    // for (const prop in employee) {
+    //     if (employee.hasOwnProperty(prop)) {
+    //         const value = employee[prop];
+    //         // const formattedProp = prop.replace(/([a-z])([A-Z])/g, '$1 $2'); // Convert camelCase to Camel Case
+    //         const paragraph = document.createElement("p");
+    //         paragraph.textContent = `${formattedProp}: ${value}`;
+    //         viewDiv.appendChild(paragraph);
+    //     }
+    // }
 }
 
+
+function editEmployee(empId, editProperties) {
+    if (employees[empId]) {
+        for (const prop in editProperties) {
+            if (editProperties.hasOwnProperty(prop)) {
+                employees[empId][prop] = editProperties[prop];
+            }
+        }
+
+        const status = true
+        const replyMessage = message.empEdited
+
+        return { employees, status, replyMessage }
+    } else {
+        const status = false
+        const replyMessage = message.empNotExist
+
+        return { employees, status, replyMessage }
+    }
+}
+
+function delEmployee(empId) {
+    if (employees[empId]) {
+        delete employees[empId]
+        const status = true
+        const replyMessage = message.empDeleted
+
+        return { employees, status, replyMessage }
+    } else {
+        const status = false
+        const replyMessage = message.empNotExist
+
+        return { employees, status, replyMessage }
+    }
+
+}
 
 
 
@@ -234,57 +331,110 @@ function createRegistrationForm() {
     submitButton.id = "sub";
     submitButton.setAttribute("type", "submit");
     submitButton.textContent = "Submit";
-    submitButton.addEventListener("submit", showEmployeeRegistrationStatus);
+    submitButton.addEventListener("click", showEmployeeRegistrationStatus);
 
     let resetButton = document.createElement("button");
     resetButton.id = "can";
     resetButton.setAttribute("type", "reset");
     resetButton.textContent = "Cancel";
 
-    form.appendChild(submitButton);
-    form.appendChild(resetButton);
+    // form.appendChild(submitButton);
+    // form.appendChild(resetButton);
+    form.append(submitButton, resetButton);
 
     // document.body.appendChild(form);
     div.appendChild(form)
     // document.body.append(div);
 }
 
+
+
+//-----Employee data collect, process and send to backend function------
 function showEmployeeRegistrationStatus() {
     let values = [];
     values.push(document.getElementById("EnterFirstName").value);
     values.push(document.getElementById("EnterLastName").value);
     values.push(document.getElementById("EnterSalary").value);
     values.push(document.getElementById("EnterDesignation").value);
-    values.push(document.querySelector("select").value);
+    values.push(document.getElementById("deptIds").value);
 
     const employee = {};
-    const properties = ['empFName', 'empLName', 'empLName', 'empSalary', 'empDesignation', 'empDept']
+    const properties = ['empFName', 'empLName', 'empSalary', 'empDesignation', 'empDept']
 
     for (let i = 0; i < properties.length; i++) {
-        employee[i] = values[i];
+        employee[properties[i]] = values[i];
     }
 
     const result = addEmployee(employee);
 
     if (result.status) {
-        let root = document.getElementById("root");
-        root.innerHTML = "";
-
-
-        const viewDiv = document.createElement("view");
-        viewDiv.innerHTML = `
-            <p>${result.replyMessage}</p>
-            <p>ID: ${result.employees.empId}</p>
-            <p>First Name: ${result.employees.empFName}</p>
-            <p>Last Name: ${result.employees.empLName}</p>
-            <p>Salary: ${result.employees.empSalary}</p>
-            <p>Designation: ${result.employees.empDesignation}</p>
-            <p>Dept ID: ${result.employees.empDept}</p>
-            `;
-
+        alert(result.replyMessage)
+        renderEmployeeList();
+    } else {
+        alert(result.replyMessage);
+        renderEmployeeList();
     }
 
+    // if (result.status) {
+    //     let root = document.getElementById("root");
+    //     root.innerHTML = "";
+
+    //     const viewDiv = document.createElement("div");
+    //     viewDiv = "view";
+    //     viewDiv.innerHTML = `
+    //         <p>${result.replyMessage}</p>
+    //         <p>ID: ${result.employees.empId}</p>
+    //         <p>First Name: ${result.employees.empFName}</p>
+    //         <p>Last Name: ${result.employees.empLName}</p>
+    //         <p>Salary: ${result.employees.empSalary}</p>
+    //         <p>Designation: ${result.employees.empDesignation}</p>
+    //         <p>Dept ID: ${result.employees.empDept}</p>
+    //         `;
+
+    //     root.append(viewDiv);
+    // }
 }
+
+
+// ----Employee registration backend function------------
+function addEmployee(employee) {
+
+    if (Object.keys(employees).length < 1) {
+        employees[1] = {
+            empId: 1,
+            empFName: employee.empFName,
+            empLName: employee.empLName,
+            empSalary: employee.empSalary,
+            empDesignation: employee.empDesignation,
+            empDept: departments[employee.empDept].deptName
+        };
+
+        const status = true
+        const replyMessage = message.empRegistered
+
+        return { employees, status, replyMessage }
+
+    }
+    else {
+        let key = Object.keys(employees).pop()
+        let id = Number(key) + 1
+        employees[id] = {
+            empId: id,
+            empFName: employee.empFName,
+            empLName: employee.empLName,
+            empSalary: employee.empSalary,
+            empDesignation: employee.empDesignation,
+            empDept: departments[employee.empDept].deptName
+        }
+
+        const status = true
+        const replyMessage = message.empRegistered
+        // console.log("start", employees)
+
+        return { employees, status, replyMessage }
+    }
+}
+
 
 
 
