@@ -14,62 +14,49 @@ const departments = {
 }
 
 const message = {
-    empRegistered: "Employ registered successfully",
-    empExist: "Employ exist in the Employees table",
-    empEdited: "Employ details updated successfully",
-    empDeleted: "Employ associated with empId deleted successfully",
-    empNotExist: "Employ empId not found in Employess table"
+    empRegistered: "Employee registered successfully",
+    empExist: "Employee exist in the Employees table",
+    empEdited: "Employee details updated successfully",
+    empDeleted: "Employee associated with empId deleted successfully",
+    empNotExist: "Employee empId not found in Employess table"
 
 }
 
 let employees = {
-    // '1': {
-    //     empId: 1,
-    //     empFName: "Ashutosh",
-    //     empLName: "Verulkar",
-    //     empSalary: "20000",
-    //     empDesignation: "Developer",
-    //     empDept: departments[1].deptId
-    // },
-    // '2': {
-    //     empId: 2,
-    //     empFName: "Harshal",
-    //     empLName: "Dhokane",
-    //     empSalary: "37000",
-    //     empDesignation: "Developer",
-    //     empDept: departments[1].deptId
-    // },
-    // '3': {
-    //     empId: 3,
-    //     empFName: "Sanket",
-    //     empLName: "Gupta",
-    //     empSalary: "45000",
-    //     empDesignation: "Data Engineer",
-    //     empDept: departments[3].deptId
-    // }
+    '1': {
+        empId: 1,
+        empFName: "Ashutosh",
+        empLName: "Verulkar",
+        empSalary: "20000",
+        empDesignation: "Developer",
+        empDept: departments[1]?.deptId
+    },
+    '2': {
+        empId: 2,
+        empFName: "Harshal",
+        empLName: "Dhokane",
+        empSalary: "37000",
+        empDesignation: "Developer",
+        empDept: departments[1]?.deptId
+    },
+    '3': {
+        empId: 3,
+        empFName: "Sanket",
+        empLName: "Gupta",
+        empSalary: "45000",
+        empDesignation: "Data Engineer",
+        empDept: departments[3]?.deptId
+    }
 }
 
 
 // -----------------------Main Page------------------------------
 function renderEmployeeList() {
-    // const head = document.querySelector("head");
-    // head.innerHTML = "";
-
-    // head.innerHTML = `<meta charset="UTF-8">
-    //     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    //     <link rel="stylesheet" href="./index.css">
-    //     <link rel="stylesheet" href="./navbar.css">
-    //     <script src="./ui.js"></script>
-    //     <title>Employee Details</title>`;
-
     document.body.innerHTML = "";
 
     const root = document.createElement("div");
     root.id = "root";
     root.innerHTML = "";
-
-    // const root = document.getElementById("root");
-    // root.innerHTML = "";
 
     const listDiv = document.createElement("div");
     listDiv.id = "left";
@@ -97,7 +84,7 @@ function renderEmployeeList() {
         const button = document.createElement("input");
         button.type = "button";
         button.value = `${employees[key].empFName} ${employees[key].empLName}`;
-        button.onclick = () => displayEmployeeDetails(employees[key]);
+        button.onclick = () => displayEmployeeDetails(key);
         cell.appendChild(button);
     }
 
@@ -133,62 +120,76 @@ function renderEmployeeList() {
     const viewDiv = document.createElement("div");
     viewDiv.id = "view";
     viewDiv.textContent = "Please select an employee to view details.";
-    // viewDiv.append(addButton);
 
     detailsDiv.append(detailsHeader, viewDiv);
     navdiv.append(nav);
     document.body.append(navdiv, root);
 }
 
-// function displayEmployeeDetails(employee) {
-//     const viewDiv = document.getElementById("view");
-//     viewDiv.innerHTML = "";
-//     viewDiv.innerHTML = `
-//     <p>ID: ${employee.empId}</p>
-//     <p>First Name: ${employee.empFName}</p>
-//     <p>Last Name: ${employee.empLName}</p>
-//     <p>Salary: ${employee.empSalary}</p>
-//     <p>Designation: ${employee.empDesignation}</p>
-//     <p>Dept ID: ${employee.empDept}</p>
-//     `;
-// }
-
-function displayEmployeeDetails(employee) {
+function displayEmployeeDetails(key) {
     const viewDiv = document.getElementById("view");
     viewDiv.innerHTML = ""; // Clear previous content
     let labels = ["Employee Id : ", "First Name : ", "Last Name : ", "Salary : ", "Designation : ", "Department : "];
-    let value = Object.values(employee);
-    // for (let i = 0; i < labels.length; i++) {
-    //     const paragraph = document.createElement("p");
-    //     paragraph.textContent = `${labels[i]}${value[i]}`
-    //     viewDiv.append(paragraph);
-    // }
+    // let values = Object.values(employees[key]);
+    let props = Object.keys(employees[key]);
 
     const table = document.createElement("table");
-    for (let i = 0; i < labels.length; i++) {
+    table.id = "details";
+    for (let i = 0; i < labels.length - 1; i++) {
         const tr = document.createElement("tr");
         const tdname = document.createElement("td");
-        tdname.textContent = labels[i];
+        const label = document.createElement("label");
+        label.textContent = labels[i];
+        tdname.append(label);
+
         const tdvalue = document.createElement("td");
-        tdvalue.textContent = value[i];
+        const input = document.createElement("input");
+        input.setAttribute("disabled", "");
+        input.id = props[i];
+        input.type = "text";
+        input.value = employees[key][props[i]];
+        // input.value = values[i]
+        tdvalue.append(input);
+
         tr.append(tdname, tdvalue);
         table.append(tr);
     }
 
+    const tr = document.createElement("tr");
+    const tdname = document.createElement("td");
+    const label = document.createElement("label");
+    label.textContent = labels[labels.length - 1];
+    tdname.append(label);
+
+    const tdvalue = document.createElement("td");
+    const input = document.createElement("input");
+    input.id = props[props.length - 1];
+    input.setAttribute("disabled", "");
+    input.type = "text";
+    input.value = departments[employees[key][props[props.length - 1]]]?.deptName;
+    // input.value = departments[values[values.length - 1]]?.deptName;
+    tdvalue.append(input);
+
+    tr.append(tdname, tdvalue);
+    table.append(tr);
+
     const nav = document.createElement("nav");
+    nav.id = "bottom";
 
     const editButton = document.createElement("input");
     editButton.type = "button";
     editButton.value = "Edit";
-    // editButton.onclick = renderEmployeeList;
+    editButton.onclick = () => {
+        editEmployeeForm(key);
+    }
 
     const delButton = document.createElement("input");
     delButton.type = "button";
     delButton.value = "Delete";
-    // delButton.onclick = createRegistrationForm;
+    // delButton.onclick = delEmployeeForm(key);
     nav.append(editButton, delButton);
 
-    viewDiv.append(table,nav);
+    viewDiv.append(table, nav);
 
 
 
@@ -207,75 +208,13 @@ function displayEmployeeDetails(employee) {
     // }
 }
 
-
-function editEmployee(empId, editProperties) {
-    if (employees[empId]) {
-        for (const prop in editProperties) {
-            if (editProperties.hasOwnProperty(prop)) {
-                employees[empId][prop] = editProperties[prop];
-            }
-        }
-
-        const status = true
-        const replyMessage = message.empEdited
-
-        return { employees, status, replyMessage }
-    } else {
-        const status = false
-        const replyMessage = message.empNotExist
-
-        return { employees, status, replyMessage }
-    }
-}
-
-function delEmployee(empId) {
-    if (employees[empId]) {
-        delete employees[empId]
-        const status = true
-        const replyMessage = message.empDeleted
-
-        return { employees, status, replyMessage }
-    } else {
-        const status = false
-        const replyMessage = message.empNotExist
-
-        return { employees, status, replyMessage }
-    }
-
-}
-
-
-
 // ---------------------Employee Registration Page--------------------
 function createRegistrationForm() {
-    // const head = document.querySelector("head");
-    // head.innerHTML = "";
-
-    // head.innerHTML = `<meta charset="UTF-8">
-    // <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    // <link rel="stylesheet" href="registration.css">
-    // <link rel="stylesheet" href="./navbar.css">
-    // <script src="./ui.js"></script>
-    // <script src="./backend.js"></script>
-    // <title>Employee Details</title>`;
-
-
-    // const body = document.querySelector("body");
-    // body.innerHTML = "";
-
-    // const nav = document.createElement("nav");
-    // nav.innerHTML = "";
-
-    // const div = document.createElement("div");
-    // div.id = "root";
-    // div.innerHTML = "";
-
     let div = document.getElementById("root");
     div.innerHTML = "";
 
     let form = document.createElement("form");
     // form.method = "post"
-    // form.action = "./firstui.js"
     form.action = "";
     form.id = "empForm";
     let heading = document.createElement("h3");
@@ -294,16 +233,11 @@ function createRegistrationForm() {
         input.placeholder = labels[i]
         input.id = labels[i].replace(/\s/g, '');
         input.setAttribute("required", "")
-        //   input.setAttribute("name", labels[i].toLowerCase());
-        //   input.setAttribute("size", i === 2 ? "0" : "15");
-        //   form.appendChild(label);
         form.appendChild(input);
         form.appendChild(document.createElement("br"));
         form.appendChild(document.createElement("br"));
     }
 
-    // let departmentLabel = document.createElement("label");
-    // departmentLabel.textContent = "Department ID : ";
     let select = document.createElement("select");
     select.id = "deptIds"
     let departmentOptions = ["IT", "HR", "Engineering"];
@@ -338,13 +272,9 @@ function createRegistrationForm() {
     resetButton.setAttribute("type", "reset");
     resetButton.textContent = "Cancel";
 
-    // form.appendChild(submitButton);
-    // form.appendChild(resetButton);
     form.append(submitButton, resetButton);
 
-    // document.body.appendChild(form);
     div.appendChild(form)
-    // document.body.append(div);
 }
 
 
@@ -368,31 +298,12 @@ function showEmployeeRegistrationStatus() {
     const result = addEmployee(employee);
 
     if (result.status) {
-        alert(result.replyMessage)
+        alert(result.replyMessage + " with UserId: " + Number(Object.keys(employees).pop()));
         renderEmployeeList();
     } else {
         alert(result.replyMessage);
         renderEmployeeList();
     }
-
-    // if (result.status) {
-    //     let root = document.getElementById("root");
-    //     root.innerHTML = "";
-
-    //     const viewDiv = document.createElement("div");
-    //     viewDiv = "view";
-    //     viewDiv.innerHTML = `
-    //         <p>${result.replyMessage}</p>
-    //         <p>ID: ${result.employees.empId}</p>
-    //         <p>First Name: ${result.employees.empFName}</p>
-    //         <p>Last Name: ${result.employees.empLName}</p>
-    //         <p>Salary: ${result.employees.empSalary}</p>
-    //         <p>Designation: ${result.employees.empDesignation}</p>
-    //         <p>Dept ID: ${result.employees.empDept}</p>
-    //         `;
-
-    //     root.append(viewDiv);
-    // }
 }
 
 
@@ -406,14 +317,13 @@ function addEmployee(employee) {
             empLName: employee.empLName,
             empSalary: employee.empSalary,
             empDesignation: employee.empDesignation,
-            empDept: departments[employee.empDept].deptName
+            empDept: departments[employee.empDept]?.deptId
         };
 
         const status = true
         const replyMessage = message.empRegistered
 
         return { employees, status, replyMessage }
-
     }
     else {
         let key = Object.keys(employees).pop()
@@ -429,11 +339,107 @@ function addEmployee(employee) {
 
         const status = true
         const replyMessage = message.empRegistered
-        // console.log("start", employees)
 
         return { employees, status, replyMessage }
     }
 }
+
+//---------------------Edit Employee page--------------
+function editEmployeeForm(key) {
+    const props = Object.keys(employees[key])
+
+    props.forEach(prop => {
+        document.getElementById(prop).removeAttribute("disabled");
+    });
+
+    const nav = document.getElementById("bottom");
+    nav.innerHTML = "";
+
+    const saveButton = document.createElement("input");
+    saveButton.type = "button";
+    saveButton.value = "Save";
+    saveButton.onclick = showEmployeeEditStatus;
+
+    const canButton = document.createElement("input");
+    canButton.type = "button";
+    canButton.value = "Cancel";
+    canButton.onclick = () => {
+        displayEmployeeDetails(key);
+    };
+    nav.append(saveButton, canButton);
+}
+
+//-----Employee Edit data collect, process and send to backend function------
+function showEmployeeEditStatus() {
+    let values = [];
+    values.push(document.getElementById("EnterFirstName").value);
+    values.push(document.getElementById("EnterLastName").value);
+    values.push(document.getElementById("EnterSalary").value);
+    values.push(document.getElementById("EnterDesignation").value);
+    values.push(document.getElementById("deptIds").value);
+
+    const employee = {};
+    const properties = ['empFName', 'empLName', 'empSalary', 'empDesignation', 'empDept']
+
+    for (let i = 0; i < properties.length; i++) {
+        employee[properties[i]] = values[i];
+    }
+
+    const result = editEmployee(employee);
+
+    if (result.status) {
+        alert(result.replyMessage)
+        renderEmployeeList();
+    } else {
+        alert(result.replyMessage);
+        renderEmployeeList();
+    }
+}
+
+
+
+function editEmployee(empId, editProperties) {
+    if (employees[empId]) {
+        for (const prop in editProperties) {
+            if (editProperties.hasOwnProperty(prop)) {
+                employees[empId][prop] = editProperties[prop];
+            }
+        }
+
+        const status = true
+        const replyMessage = message.empEdited
+
+        return { employees, status, replyMessage }
+    } else {
+        const status = false
+        const replyMessage = message.empNotExist
+
+        return { employees, status, replyMessage }
+    }
+}
+
+function delEmployeeForm(params) {
+
+}
+
+function delEmployee(empId) {
+    if (employees[empId]) {
+        delete employees[empId]
+        const status = true
+        const replyMessage = message.empDeleted
+
+        return { employees, status, replyMessage }
+    } else {
+        const status = false
+        const replyMessage = message.empNotExist
+
+        return { employees, status, replyMessage }
+    }
+
+}
+
+
+
 
 
 

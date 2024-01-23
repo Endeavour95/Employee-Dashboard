@@ -31,7 +31,7 @@ body {
   justify-content: center;
 } */
 
-table {
+#left table {
   border-collapse: collapse;
   width: 100%;
   text-align: center;
@@ -87,7 +87,7 @@ input[type="button"]:hover {
 
 #right {
   width: 80%;
-  text-align: center;
+  text-align: -webkit-center;
 }
 
 
@@ -214,11 +214,19 @@ nav input[type="button"] {
   width: 150px;
   height: 40px;
   border-radius: 20px;
-  vertical-align: middle;
+  vertical-align: middle; */
   /* position: absolute;
   right: 20px; */
-} */
+/* } */
 
 nav input[type="button"]:hover {
   background-color: #45a049;
+}
+
+
+/* Display employee details page css */
+#details {
+  border-collapse: collapse;
+  /* width: 100%; */
+  /* text-align: center; */
 }
